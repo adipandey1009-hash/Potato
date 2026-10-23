@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #F4F1E8;
+    --surface: #FFFEFA;
+    --ink: #171914;
+    --muted: #64675D;
+    --olive: #303B2C;
+    --lime: #D8F36A;
+    --border: #E1E0D6;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Accessible visible focus ring */
+  *:focus-visible {
+    outline: 2px solid var(--olive);
+    outline-offset: 2px;
+  }
+}
+
+/* Custom editorial typography utility classes */
+.font-drama {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-telemetry {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Pulse animation for queue telemetry */
+@keyframes queuePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
+}
+
+.animate-queue-pulse {
+  animation: queuePulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

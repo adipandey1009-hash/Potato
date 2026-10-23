@@ -1,0 +1,41 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: potato-backend-test
+  datasource:
+    url: jdbc:h2:mem:potatotest;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+potato:
+  security:
+    jwt:
+      secret: 4c653066613337626130386134376435386237613563636531326462613963383832393366623631623832353361366166303233383437346663363435343461
+      access-token-expiration-ms: 900000
+      refresh-token-expiration-ms: 604800000
+    cors:
+      allowed-origins: http://localhost:5173
+  queue:
+    worker-poll-rate-ms: 100000
+    outbox-poll-rate-ms: 100000
+  finance:
+    tax-rate: 0.0825
+  seed:
+    enabled: false
