@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: potato-backend-local
+  datasource:
+    url: jdbc:h2:mem:potatodb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+  flyway:
+    enabled: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+potato:
+  security:
+    jwt:
+      secret: 4c653066613337626130386134376435386237613563636531326462613963383832393366623631623832353361366166303233383437346663363435343461
+      access-token-expiration-ms: 900000
+      refresh-token-expiration-ms: 604800000
+    cors:
+      allowed-origins: http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://localhost
+  queue:
+    worker-poll-rate-ms: 3000
+    outbox-poll-rate-ms: 2000
+  finance:
+    tax-rate: 0.0825
+  seed:
+    enabled: true
+    admin-email: admin@potato.local
+    admin-password: PotatoAdmin123!
+    kitchen-email: kitchen@potato.local
+    kitchen-password: PotatoKitchen123!
+    customer-email: customer@potato.local
+    customer-password: PotatoDemo123!
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
